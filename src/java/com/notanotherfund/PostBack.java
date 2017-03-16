@@ -48,14 +48,16 @@ public class PostBack extends HttpServlet {
             out.println("<title>Servlet PostBack</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PostBack at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Testing at " + request.getContextPath() + "</h1>");
             out.println("Request Name Value:" + request.getQueryString());
             out.println("</body>");
             out.println("</html>");            
+
                 try (Jedis jedis = pool.getResource()) {
                     String message=getBody(request);
                     jedis.lpush("zerodha:orderstatus", message);
                     jedis.publish("zerodha", message);
+                    
                 }            
         }
     }

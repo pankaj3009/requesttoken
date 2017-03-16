@@ -49,7 +49,7 @@ public class ProcessRequestToken extends HttpServlet {
             out.println("Request Name Value:" + request.getQueryString());
             out.println("</body>");
             out.println("</html>");
-
+            if(request.getQueryString()!=null){
             String[] parameters = URLDecoder.decode(request.getQueryString(), "UTF-8").split("&");
             if (parameters.length > 1) {
                 String secondPair = parameters[1];
@@ -61,6 +61,7 @@ public class ProcessRequestToken extends HttpServlet {
                     jedis.set("requesttoken", nameValue[1]);
 
                 }
+            }                
             }
         }
 
